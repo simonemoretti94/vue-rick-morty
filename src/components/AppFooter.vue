@@ -28,9 +28,20 @@ export default {
 </script>
 
 <template>
-    <div>
+    <footer>
 
-    </div>
+        <p>
+            &copy; live2024 Boolean rick morty live
+        </p>
+
+    </footer>
 </template>
 
-<style scoped></style>
+<style scoped>
+footer {
+    background-color: var(--rick-morty-dark);
+    color: var(--rick-morty-lighter);
+    padding: 2rem;
+    text-align: center;
+}
+</style>

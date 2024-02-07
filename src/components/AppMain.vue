@@ -44,6 +44,20 @@ export default {
 <template>
     <main>
         <div class="container">
+
+
+            <div class="filters">
+                <!-- add name filter input -->
+                <input type="text" placeholder="Type a name to search">
+                <!-- add a select status filter -->
+                <select name="status" id="status">
+                    <option value="" selected>All</option>
+                    <option value="alive">Alive</option>
+                    <option value="death">Death</option>
+                    <option value="unknown">Unknown</option>
+                </select>
+            </div>
+
             <div class="row">
                 <CharacterItem v-for="character in this.characters.results" :characterEl="character"></CharacterItem>
             </div>
