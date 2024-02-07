@@ -1,9 +1,10 @@
 <script>
+import AppLogo from './AppLogo.vue';
 
 export default {
     name: 'AppHeader',
     components: {
-        //*,
+        AppLogo,
 
     },
     data() {
@@ -27,9 +28,13 @@ export default {
 </script>
 
 <template>
-    <div>
-
-    </div>
+    <header>
+        <div class="container">
+            <div class="logo">
+                <AppLogo></AppLogo>
+            </div>
+        </div>
+    </header>
 </template>
 
 <style scoped></style>

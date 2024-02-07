@@ -50,6 +50,10 @@ export default {
     &:hover {
         filter: drop-shadow(0 0 15px #a9d3e9);
         scale: 1.01;
+
+        >img {
+            border-radius: 10px;
+        }
     }
 
     >img {
