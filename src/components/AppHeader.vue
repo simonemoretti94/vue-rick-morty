@@ -30,11 +30,43 @@ export default {
 <template>
     <header>
         <div class="container">
-            <div class="logo">
-                <AppLogo></AppLogo>
-            </div>
+
+            <AppLogo></AppLogo>
+            <nav>
+                <ul>
+                    <li><a href="">Home</a></li>
+                    <li><a href="">Characters</a></li>
+                </ul>
+            </nav>
+
         </div>
     </header>
 </template>
 
-<style scoped></style>
+<style scoped>
+header {
+    background-color: var(--rick-morty-lighter);
+    padding: 1rem;
+
+    >.container {
+        display: flex;
+        justify-content: space-between;
+
+        >nav {
+            >ul {
+                list-style: none;
+                display: flex;
+                gap: 1 rem;
+            }
+
+            & a {
+                margin: auto .5rem;
+                text-decoration: none;
+                color: var(--rick-morty-dark);
+            }
+        }
+
+
+    }
+}
+</style>

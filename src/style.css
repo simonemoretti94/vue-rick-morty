@@ -6,6 +6,8 @@
 
 :root {
   --rick-morty-light: rgb(181, 181, 181);
+  --rick-morty-lighter: white;
+  --rick-morty-dark: #333;
 }
 
 body {
@@ -20,6 +22,7 @@ img {
   width: 80%;
   max-width: 1176px;
   margin: auto;
+  align-items: center;
 
 
 }
