@@ -1,17 +1,18 @@
 <script>
 import axios from 'axios';
+import CharacterItem from './CharacterItem.vue';
 
 export default {
     name: 'AppMain',
     components: {
-        //*,
+        CharacterItem,
 
     },
     data() {
 
         return {
             base_api_url: 'https://rickandmortyapi.com/api/character',
-            characters: null,
+            characters: [],
             pagination_data: null,
             error: false,
         }
@@ -41,18 +42,13 @@ export default {
 </script>
 
 <template>
-    <div v-if="characters">
-        <div v-for="(character) in this.characters.results" :key="character.id + '_character '" class="">
-            {{ character.name }}
-            <img :src="character.image" alt="">
-            {{ character.species }}
-            {{ character.status }}
-            <br>
+    <main>
+        <div class="container">
+            <div class="row">
+                <CharacterItem v-for="character in this.characters.results" :characterEl="character"></CharacterItem>
+            </div>
         </div>
-    </div>
-    <div v-else>
-        <p>Ciao zi</p>
-    </div>
+    </main>
 </template>
 
 <style scoped></style>
