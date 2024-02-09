@@ -31,7 +31,7 @@ export default {
     <footer>
 
         <p>
-            &copy; live2024 Boolean rick morty live
+            &copy;Live 2024 Boolean rick morty live
         </p>
 
     </footer>

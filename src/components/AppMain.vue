@@ -15,29 +15,57 @@ export default {
             characters: [],
             pagination_data: null,
             error: false,
+            loading: true,
+        }
+    },
+    computed: {
+        getResults() {
+            return this.characters.results ? this.characters.results.length : 'No results yet';
+        },
+
+        loadingResult() {
+            return this.loading == false ? '' : ', loading...';
         }
     },
     methods: {
-
+        getCharacters(url) {
+            axios
+                .get(url)
+                .then((response) => {
+                    //console.log(response);
+                    this.characters = response.data;
+                    console.log('this characters: ', this.characters);
+                    console.log('this characters results: ', this.characters.results);
+                    this.loading = !this.loading;
+                    // this.pagination_data = response.data.info;
+                })
+                .catch((error) => {
+                    //console.error(error);
+                    this.error = error.message;
+                });
+        }
+    },
+    created() {
+        setTimeout(() => {
+            this.getCharacters(this.base_api_url);
+        }, 5000)
     },
     mounted() {
-        axios
-            .get(this.base_api_url)
-            .then((response) => {
-                //console.log(response);
-                this.characters = response.data;
-                console.log('this characters: ', this.characters);
-                console.log('this characters results: ', this.characters.results);
-                // this.pagination_data = response.data.info;
-            })
-            .catch((error) => {
-                //console.error(error);
-                this.error = error.message;
-            });
+        // axios
+        //     .get(this.base_api_url)
+        //     .then((response) => {
+        //         //console.log(response);
+        //         this.characters = response.data;
+        //         console.log('this characters: ', this.characters);
+        //         console.log('this characters results: ', this.characters.results);
+        //         // this.pagination_data = response.data.info;
+        //     })
+        //     .catch((error) => {
+        //         //console.error(error);
+        //         this.error = error.message;
+        //     });
     },
-    computed: {
 
-    },
 }
 </script>
 
@@ -58,11 +86,36 @@ export default {
                 </select>
             </div>
 
-            <div class="row">
+            <div v-if="!loading" class="row">
                 <CharacterItem v-for="character in this.characters.results" :characterEl="character"></CharacterItem>
             </div>
+            <div id="v-else" v-else>
+                <div style="display: flex; justify-content: center;">
+                    <i class="fa-solid fa-spinner fa-spin"></i>
+                    <div id="results" class="my-1">{{ getResults }}{{ loadingResult }}</div>
+                </div>
+            </div>
+
+
         </div>
     </main>
 </template>
 
-<style scoped></style>
+<style scoped>
+div#results {
+    margin: .5rem auto;
+}
+
+div#v-else {
+    display: flex;
+
+    >i {
+        margin: 0;
+        padding: 0;
+    }
+
+    >div {
+        align-self: flex-start;
+    }
+}
+</style>
