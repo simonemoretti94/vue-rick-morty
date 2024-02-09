@@ -74,7 +74,7 @@ export default {
         <div class="container">
 
 
-            <div class="filters">
+            <div id="main_filters">
                 <!-- add name filter input -->
                 <input type="text" placeholder="Type a name to search">
                 <!-- add a select status filter -->
@@ -102,6 +102,16 @@ export default {
 </template>
 
 <style scoped>
+div#main_filters {
+    margin: .5rem auto;
+
+    >input,
+    select {
+        border-radius: 5px;
+        text-align: center;
+    }
+}
+
 div#results {
     margin: .5rem auto;
 }
