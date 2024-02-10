@@ -50,22 +50,6 @@ export default {
             this.getCharacters(this.base_api_url);
         }, 5000)
     },
-    mounted() {
-        // axios
-        //     .get(this.base_api_url)
-        //     .then((response) => {
-        //         //console.log(response);
-        //         this.characters = response.data;
-        //         console.log('this characters: ', this.characters);
-        //         console.log('this characters results: ', this.characters.results);
-        //         // this.pagination_data = response.data.info;
-        //     })
-        //     .catch((error) => {
-        //         //console.error(error);
-        //         this.error = error.message;
-        //     });
-    },
-
 }
 </script>
 
