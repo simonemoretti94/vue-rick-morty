@@ -1,11 +1,13 @@
 <script>
 import axios from 'axios';
 import CharacterItem from './CharacterItem.vue';
+import ResultsFilter from './ResultsFilter.vue'
 
 export default {
     name: 'AppMain',
     components: {
         CharacterItem,
+        ResultsFilter,
 
     },
     data() {
@@ -39,18 +41,20 @@ export default {
                     console.log('this characters: ', this.characters);
                     console.log('this characters results: ', this.characters.results);
                     this.loading = !this.loading;
+                    this.error = false;
                     // this.pagination_data = response.data.info;
                 })
                 .catch((error) => {
                     //console.error(error);
-                    this.error = error.message;
+                    this.error = error.response.data.error;
                 });
         },
-        filterResults() {
-            const url = `${this.base_api_url}?name=${this.searchText}&status=${this.selectedStatus}`;
-            console.log(url);
+        filterResults(data) {
+            console.log('filtered', data);
+            // const url = `${this.base_api_url}?name=${this.searchText}&status=${this.selectedStatus}`;
+            // console.log(url);
 
-            this.getCharacters(url);
+            // this.getCharacters(url);
         },
     },
     created() {
@@ -67,19 +71,11 @@ export default {
         <div class="container">
 
 
-            <div id="main_filters">
-                <!-- add name filter input -->
-                <input type="text" placeholder="Type a name to search" v-model="searchText">
-                <!-- add a select status filter -->
-                <select name="status" id="status" v-model="selectedStatus">
-                    <option value="" selected>All</option>
-                    <option value="Alive">Alive</option>
-                    <option value="Dead">Dead</option>
-                    <option value="Unknown">Unknown</option>
-                </select>
 
-                <button @click="filterResults">Filter</button>
-            </div>
+
+            <ResultsFilter @filtered="filterResults(data)"></ResultsFilter>
+
+            <div v-if="error" style="color: red;">{{ error }}</div>
 
             <div v-if="!loading" class="row">
                 <CharacterItem v-for="character in this.characters.results" :characterEl="character"></CharacterItem>
