@@ -16,6 +16,8 @@ export default {
             pagination_data: null,
             error: false,
             loading: true,
+            searchText: '',
+            selectedStatus: '',
         }
     },
     computed: {
@@ -43,12 +45,19 @@ export default {
                     //console.error(error);
                     this.error = error.message;
                 });
-        }
+        },
+        filterResults() {
+            const url = `${this.base_api_url}?name=${this.searchText}&status=${this.selectedStatus}`;
+            console.log(url);
+
+            this.getCharacters(url);
+        },
     },
     created() {
-        setTimeout(() => {
-            this.getCharacters(this.base_api_url);
-        }, 5000)
+        // setTimeout(() => {
+        //     this.getCharacters(this.base_api_url);
+        // }, 5000);
+        this.getCharacters(this.base_api_url);
     },
 }
 </script>
@@ -60,14 +69,16 @@ export default {
 
             <div id="main_filters">
                 <!-- add name filter input -->
-                <input type="text" placeholder="Type a name to search">
+                <input type="text" placeholder="Type a name to search" v-model="searchText">
                 <!-- add a select status filter -->
-                <select name="status" id="status">
+                <select name="status" id="status" v-model="selectedStatus">
                     <option value="" selected>All</option>
-                    <option value="alive">Alive</option>
-                    <option value="death">Death</option>
-                    <option value="unknown">Unknown</option>
+                    <option value="Alive">Alive</option>
+                    <option value="Dead">Dead</option>
+                    <option value="Unknown">Unknown</option>
                 </select>
+
+                <button @click="filterResults">Filter</button>
             </div>
 
             <div v-if="!loading" class="row">
