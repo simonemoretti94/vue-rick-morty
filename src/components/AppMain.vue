@@ -1,7 +1,8 @@
 <script>
+import { store } from '../store.js';
 import axios from 'axios';
 import CharacterItem from './CharacterItem.vue';
-import ResultsFilter from './ResultsFilter.vue'
+import ResultsFilter from './ResultsFilter.vue';
 
 export default {
     name: 'AppMain',
@@ -13,7 +14,9 @@ export default {
     data() {
 
         return {
-            base_api_url: 'https://rickandmortyapi.com/api/character',
+            store, //store.js node
+
+            //base_api_url: 'https://rickandmortyapi.com/api/character',
             characters: [],
             pagination_data: null,
             error: false,
@@ -52,17 +55,14 @@ export default {
         filterResults(data) {
             console.log('filtered', data);
             [this.searchText, this.selectedStatus] = data;
-            const url = `${this.base_api_url}?name=${this.searchText}&status=${this.selectedStatus}`;
+            const url = `${store.base_api_url}?name=${this.searchText}&status=${this.selectedStatus}`;
             console.log(url);
 
             this.getCharacters(url);
         },
     },
     created() {
-        // setTimeout(() => {
-        //     this.getCharacters(this.base_api_url);
-        // }, 5000);
-        this.getCharacters(this.base_api_url);
+        this.getCharacters(store.base_api_url);
     },
 }
 </script>
@@ -76,7 +76,7 @@ export default {
 
             <ResultsFilter @filtered="filterResults"></ResultsFilter>
 
-            <div v-if="error" style="color: red;">{{ error }}</div>
+            <div v-if="error" style="color: red">{{ error }}</div>
 
             <div v-if="!loading" class="row">
                 <CharacterItem v-for="character in this.characters.results" :characterEl="character"></CharacterItem>
