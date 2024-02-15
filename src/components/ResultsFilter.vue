@@ -35,7 +35,7 @@ export default {
         </select>
 
         <!-- <button @click="filterResults()">Filter</button> -->
-        <button @click="$emit('filtered', ['fabio'])">Filter</button>
+        <button @click="$emit('filtered', [searchText, selectedStatus])">Filter</button>
     </div>
 </template>
 

@@ -40,7 +40,7 @@ export default {
                     this.characters = response.data;
                     console.log('this characters: ', this.characters);
                     console.log('this characters results: ', this.characters.results);
-                    this.loading = !this.loading;
+                    this.loading = false;
                     this.error = false;
                     // this.pagination_data = response.data.info;
                 })
@@ -51,10 +51,11 @@ export default {
         },
         filterResults(data) {
             console.log('filtered', data);
-            // const url = `${this.base_api_url}?name=${this.searchText}&status=${this.selectedStatus}`;
-            // console.log(url);
+            [this.searchText, this.selectedStatus] = data;
+            const url = `${this.base_api_url}?name=${this.searchText}&status=${this.selectedStatus}`;
+            console.log(url);
 
-            // this.getCharacters(url);
+            this.getCharacters(url);
         },
     },
     created() {
@@ -73,7 +74,7 @@ export default {
 
 
 
-            <ResultsFilter @filtered="filterResults(data)"></ResultsFilter>
+            <ResultsFilter @filtered="filterResults"></ResultsFilter>
 
             <div v-if="error" style="color: red;">{{ error }}</div>
 
