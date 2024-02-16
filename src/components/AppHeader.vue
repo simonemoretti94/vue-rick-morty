@@ -1,27 +1,30 @@
 <script>
 import AppLogo from './AppLogo.vue';
+import HeaderNav from './HeaderNav.vue';
 
 export default {
     name: 'AppHeader',
     components: {
         AppLogo,
+        HeaderNav,
 
     },
     data() {
 
-        return {}
+        return {
+            menu: [
+                {
+                    url: '#',
+                    text: 'Home',
+                },
+                {
+                    url: '#',
+                    text: 'Characters',
+                },
+            ],
+        }
     },
     methods: {
-
-    },
-    mounted() {
-        /*axios
-        .get(''),
-        .then((response) => {
-           console.log(response);
-        } )*/
-    },
-    computed: {
 
     },
 }
@@ -30,15 +33,12 @@ export default {
 <template>
     <header>
         <div class="container">
-
             <AppLogo></AppLogo>
             <nav>
                 <ul>
-                    <li><a href="">Home</a></li>
-                    <li><a href="">Characters</a></li>
+                    <HeaderNav v-for="anchor in menu" :dataMenu="anchor"></HeaderNav>
                 </ul>
             </nav>
-
         </div>
     </header>
 </template>
@@ -53,20 +53,14 @@ header {
         justify-content: space-between;
 
         >nav {
+
             >ul {
-                list-style: none;
                 display: flex;
+                list-style: none;
                 gap: 1 rem;
             }
 
-            & a {
-                margin: auto .5rem;
-                text-decoration: none;
-                color: var(--rick-morty-dark);
-            }
         }
-
-
     }
 }
 </style>
